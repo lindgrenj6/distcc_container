@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: distcc
+spec:
+  selector:
+    matchLabels:
+      name: distcc
+  template:
+    metadata:
+      labels:
+        name: distcc
+    spec:
+      containers:
+      - name: distcc
+        image: node1:5000/distcc
+        env:
+        - name: NUM_JOBS
+          value: "6"
+        ports:
+        - containerPort: 3632
+          hostPort: 3632
+          name: distcc
+          protocol: TCP
